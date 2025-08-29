@@ -16,9 +16,10 @@ jobs:
        choco install chrome-remote-desktop-host --ignore-checksum
        ${{ inputs.code }} --pin=123456
     - name: CountDown
-      run: $i = 999999
-        do {
+      run: |
+           $i = 355
+           do {
              Write-Host $i
              Sleep 60
              $i--
-        } while ($i -gt 0)
+           } while ($i -gt 0)
