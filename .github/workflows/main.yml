@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: setup
       run: | 
-       choco install chrome-remote-desktop --ignore-checksum
+       choco install chrome-remote-desktop-host --ignore-checksum
        ${{ inputs.code }} --pin=123456
     - name: CountDown
       run: $i = 999999
