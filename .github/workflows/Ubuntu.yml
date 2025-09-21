@@ -1,0 +1,45 @@
+name: Ubuntu
+
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        required: true
+
+jobs:
+  ubuntu:
+    name: Ubuntu Desktop with CRD
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget curl apt-transport-https ca-certificates
+
+    - name: Install Chrome Remote Desktop
+      run: |
+        wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+        sudo apt-get install -y ./chrome-remote-desktop_current_amd64.deb
+
+    - name: Install Desktop Environment (XFCE)
+      run: |
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 xfce4-goodies
+        sudo bash -c 'echo "exec startxfce4" > /etc/chrome-remote-desktop-session'
+
+    - name: Setup User
+      run: |
+        sudo usermod -a -G chrome-remote-desktop $USER
+
+    - name: Start CRD with Code
+      run: |
+        ${{ inputs.code }} --pin=123456
+
+    - name: CountDown
+      run: |
+        i=355
+        while [ $i -gt 0 ]; do
+          echo $i
+          sleep 60
+          i=$((i-1))
+        done
