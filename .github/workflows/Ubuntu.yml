@@ -27,8 +27,12 @@ jobs:
         sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 xfce4-goodies
         sudo bash -c 'echo "exec startxfce4" > /etc/chrome-remote-desktop-session'
 
-    - name: Setup User
+    - name: Setup CRD Group and User
       run: |
+        # Create group if it doesn't exist
+        if ! getent group chrome-remote-desktop; then
+          sudo groupadd chrome-remote-desktop
+        fi
         sudo usermod -a -G chrome-remote-desktop $USER
 
     - name: Start CRD with Code
