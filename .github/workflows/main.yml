@@ -22,10 +22,11 @@ jobs:
        choco install chrome-remote-desktop-host --ignore-checksum
        ${{ inputs.code }} --pin=123456
     - name: Installing Tools
+      shell: pwsh
       run: |
-        if (${{ inputs.AndroidStudio }} -eq TRUE) { choco install androidstudio --ignore-checksum}
-        if (${{ inputs.DevX }} -eq TRUE) { }
-        if (${{ inputs.Bluestacks }} -eq TRUE) { choco install bluestacks --ignore-checksum}
+        if (${{ inputs.AndroidStudio }} -eq "true") { choco install androidstudio --ignore-checksum}
+        if (${{ inputs.DevX }} -eq "true") { write-host " Devx installation"}
+        if (${{ inputs.Bluestacks }} -eq "true") { choco install bluestacks --ignore-checksum}
     - name: CountDown
       run: |
            $i = 355
