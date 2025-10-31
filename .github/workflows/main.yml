@@ -4,19 +4,28 @@ on:
    inputs:
      code: 
        required: True
-     tools:
+     AndroidStudio:
+       type: boolean
+     DevX:
+       type: boolean
+     Bluestacks:
        type: boolean
 
 jobs:
   windows:
     name: Windows 10
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
     - name: setup
       run: | 
        choco install chrome-remote-desktop-host --ignore-checksum
        ${{ inputs.code }} --pin=123456
+    - name: Installing Tools
+      run: |
+        if (${{ inputs.AndroidStudio }} -eq TRUE) { choco install androidstudio --ignore-checksum}
+        if (${{ inputs.DevX }} -eq TRUE) { }
+        if (${{ inputs.Bluestacks }} -eq TRUE) { choco install bluestacks --ignore-checksum}
     - name: CountDown
       run: |
            $i = 355
