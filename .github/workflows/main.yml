@@ -4,6 +4,8 @@ on:
    inputs:
      code: 
        required: True
+     tools:
+       type: boolean
 
 jobs:
   windows:
