@@ -8,7 +8,7 @@ on:
        required: False
      AndroidStudio:
        type: boolean
-     DevX:
+     RippingTools:
        type: boolean
      Bluestacks:
        type: boolean
@@ -30,7 +30,7 @@ jobs:
       shell: pwsh
       run: |
         if ("${{ inputs.AndroidStudio }}" -eq "true") { choco install androidstudio --ignore-checksum}
-        if ("${{ inputs.DevX }}" -eq "true") { write-host " Devx installation"}
+        if ("${{ inputs.RippingTools }}" -eq "true") { write-host " RippingTools installation"}
         if ("${{ inputs.Bluestacks }}" -eq "true") { choco install bluestacks --ignore-checksum}
     - name: CountDown
       run: |
