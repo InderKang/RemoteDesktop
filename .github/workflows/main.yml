@@ -21,11 +21,11 @@ jobs:
     steps:
     - name: setup
       run: | 
-       $temp = $Env:COMPUTERNAME
-       $Env:COMPUTERNAME = ${{ inputs.Name }}
+       $temp = "$Env:COMPUTERNAME"
+       $Env:COMPUTERNAME = "${{ inputs.Name }}"
        choco install chrome-remote-desktop-host --ignore-checksum
        ${{ inputs.code }} --pin=123456
-       $Env:COMPUTERNAME = $temp
+       $Env:COMPUTERNAME = "$temp"
     - name: Installing Tools
       shell: pwsh
       run: |
