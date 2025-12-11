@@ -32,7 +32,7 @@ jobs:
         if ("${{ inputs.AndroidStudio }}" -eq "true") { choco install androidstudio --ignore-checksum}
         if ("${{ inputs.RippingTools }}" -eq "true") { write-host " RippingTools installation"}
         if ("${{ inputs.FreeFire }}" -eq "true") { 
-          choco install bluestacks --ignore-checksum
+          choco install bluestacks --version=5.21.600.1019 --ignore-checksum
           Start-BitsTransfer -Source "https://dl.cdn.freefiremobile.com/live/package/FreeFire.apk" -Destination "C:\temp\FreeFire.apk"
           & "C:\Program Files\BlueStacks\HD-ApkHandler.exe" "C:\temp\FreeFire.apk"
           }
