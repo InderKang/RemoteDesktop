@@ -10,7 +10,7 @@ on:
        type: boolean
      RippingTools:
        type: boolean
-     Bluestacks:
+     FreeFire:
        type: boolean
 
 jobs:
@@ -31,7 +31,11 @@ jobs:
       run: |
         if ("${{ inputs.AndroidStudio }}" -eq "true") { choco install androidstudio --ignore-checksum}
         if ("${{ inputs.RippingTools }}" -eq "true") { write-host " RippingTools installation"}
-        if ("${{ inputs.Bluestacks }}" -eq "true") { choco install bluestacks --ignore-checksum}
+        if ("${{ inputs.FreeFire }}" -eq "true") { 
+          choco install bluestacks --ignore-checksum
+          Start-BitsTransfer -Source "https://dl.cdn.freefiremobile.com/live/package/FreeFire.apk" -Destination "C:\temp\FreeFire.apk"
+          & "C:\Program Files\BlueStacks\HD-ApkHandler.exe" "C:\temp\FreeFire.apk"
+          }
     - name: CountDown
       run: |
            $i = 355
